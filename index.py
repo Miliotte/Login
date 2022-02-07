@@ -8,14 +8,13 @@ from turtle import left
 
 # Criar Windows
 
-
-
 win = Tk()
 win.title("Miliotte System - Acess Panel")
 win.geometry("600x300")
 win.configure(background="white")
 win.resizable(width=FALSE, height=False)
 win.attributes("-alpha", 0.9)
+win.iconbitmap(default="img/logoIcon.ico")
 
 logo = PhotoImage(file="img/logo.png")
 
@@ -50,7 +49,6 @@ LoginButton.place(x=100, y=225)
 
 RegisterButton = ttk.Button(Rightrame, text="Register", width=20)
 RegisterButton.place(x=130, y=260)
-
 
 win.mainloop()
 
