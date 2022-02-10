@@ -39,7 +39,7 @@ UserEntry.place(x=150, y=113)
 PassLabel = Label(Rightrame, text="Password:", font=("Century Gothic", 20), bg='MIDNIGHTBLUE' , fg="White")
 PassLabel.place(x=6, y=150)
 
-PassEntry = ttk.Entry(Rightrame, width=30)
+PassEntry = ttk.Entry(Rightrame, width=30, show="•")
 PassEntry.place(x=150, y=160)
 
 ##Button
