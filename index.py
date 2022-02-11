@@ -47,7 +47,11 @@ PassEntry.place(x=150, y=160)
 LoginButton = ttk.Button(Rightrame, text="Login", width=30)
 LoginButton.place(x=100, y=225)
 
-RegisterButton = ttk.Button(Rightrame, text="Register", width=20)
+def Register():
+    LoginButton.place(x=5000)
+    RegisterButton.place(x=5000)
+
+RegisterButton = ttk.Button(Rightrame, text="Register", width=20, command=Register)
 RegisterButton.place(x=130, y=260)
 
 win.mainloop()
