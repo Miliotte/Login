@@ -53,8 +53,31 @@ def Register():
     NomeLabel = Label(RightFrame, text= "Name: ", font=("Century Gothic", 20), bg="MIDNIGHTBLUE", fg="white")
     NomeLabel.place(x=5, y=5)
 
-    NomeEntry = Entry(RightFrame, width=30)
-    NomeEntry.place(x=150, y=20)
+    NomeEntry = Entry(RightFrame, width=39)
+    NomeEntry.place(x=100, y=20)
+
+    EmailLabel = Label(RightFrame, text= "Email: ", font=("Century Gothic", 20), bg="MIDNIGHTBLUE", fg="white")
+    EmailLabel.place(x=5, y=55)
+
+    EmailEntry = Entry(RightFrame, width=39, show="•")
+    EmailEntry.place(x=100, y=70)
+
+    Register = ttk.Button(RightFrame, text="Register", width=30)
+    Register.place(x=100, y=225)
+
+    def BackToLogin ():
+        NomeLabel.place(x=5000)
+        NomeEntry.place(x=5000)
+        EmailLabel.place(x=5000)
+        EmailEntry.place(x=5000)
+        Register.place(x=5000)
+        Back.place(x=5000)
+
+        LoginButton.place(x=100, y=225)
+        RegisterButton.place(x=130, y=260)
+
+    Back = ttk.Button(RightFrame, text="Back", width=20, command=BackToLogin)
+    Back.place(x=130, y=260)
 
 RegisterButton = ttk.Button(RightFrame, text="Register", width=20, command=Register)
 RegisterButton.place(x=130, y=260)
