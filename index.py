@@ -53,13 +53,13 @@ def Register():
     NomeLabel = Label(RightFrame, text= "Name: ", font=("Century Gothic", 20), bg="MIDNIGHTBLUE", fg="white")
     NomeLabel.place(x=5, y=5)
 
-    NomeEntry = Entry(RightFrame, width=39)
+    NomeEntry = ttk.Entry(RightFrame, width=39)
     NomeEntry.place(x=100, y=20)
 
-    EmailLabel = Label(RightFrame, text= "Email: ", font=("Century Gothic", 20), bg="MIDNIGHTBLUE", fg="white")
+    EmailLabel = ttk.Label(RightFrame, text= "Email: ", font=("Century Gothic", 20), bg="MIDNIGHTBLUE", fg="white")
     EmailLabel.place(x=5, y=55)
 
-    EmailEntry = Entry(RightFrame, width=39, show="•")
+    EmailEntry = ttk.Entry(RightFrame, width=39, show="•")
     EmailEntry.place(x=100, y=70)
 
     Register = ttk.Button(RightFrame, text="Register", width=30)
