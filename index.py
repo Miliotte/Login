@@ -5,6 +5,7 @@ from tkinter import messagebox
 from tkinter import font
 from tkinter import ttk
 from turtle import left, width
+import DataBase
 
 # Criar Windows
 
