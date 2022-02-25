@@ -57,13 +57,28 @@ def Register():
     NomeEntry = ttk.Entry(RightFrame, width=39)
     NomeEntry.place(x=100, y=20)
 
-    EmailLabel = ttk.Label(RightFrame, text= "Email: ", font=("Century Gothic", 20), bg="MIDNIGHTBLUE", fg="white")
+    EmailLabel = Label(RightFrame, text= "Email: ", font=("Century Gothic", 20), bg="MIDNIGHTBLUE", fg="white")
     EmailLabel.place(x=5, y=55)
 
-    EmailEntry = ttk.Entry(RightFrame, width=39, show="•")
+    EmailEntry = ttk.Entry(RightFrame, width=39)
     EmailEntry.place(x=100, y=70)
 
-    Register = ttk.Button(RightFrame, text="Register", width=30)
+    ##register back to database
+
+    def RegisterToDataBase():
+        Name = NomeEntry.get()
+        Email = EmailEntry.get()
+        User = UserEntry.get()
+        Pass = PassEntry.get()
+
+        DataBase.cursor.execute("""
+        INSERT INTO Users(Name, Email, user, password)VALUES(?,?,?,?)
+        """,(Name, Email, User, Pass))
+        DataBase.conm.commit()
+        
+        messagebox.showinfo(title="Register Info", message="Register Sucessfull")
+
+    Register = ttk.Button(RightFrame, text="Register", width=30, command=RegisterToDataBase)
     Register.place(x=100, y=225)
 
     def BackToLogin ():
