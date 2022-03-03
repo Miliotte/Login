@@ -1,10 +1,13 @@
 #Importação das Bibliotecas
 
+from sqlite3 import TimeFromTicks
 from tkinter import *
 from tkinter import messagebox
 from tkinter import font
 from tkinter import ttk
 from turtle import left, width
+
+from numpy import tile
 import DataBase
 
 # Criar Windows
@@ -43,9 +46,24 @@ PassLabel.place(x=6, y=150)
 PassEntry = ttk.Entry(RightFrame, width=30, show="•")
 PassEntry.place(x=150, y=160)
 
+def Login():
+    User = UserEntry.get()
+    Pass = PassEntry.get()
+
+    DataBase.cursor.execute("""
+    SELECT User, Password FROM Users WHERE User = ? and Password = ?
+    """, (User, Pass))
+    print("Logou")
+    VerifyLogin = DataBase.cursor.fetchone()
+    try:
+        if (User in VerifyLogin and Pass in VerifyLogin):
+            messagebox.showinfo(tile="Login Info", message="Acesso Confirmardo")
+    except:
+            messagebox.showinfo(title="Login Info", message="Acesso Negado")
+
 ##Button
 
-LoginButton = ttk.Button(RightFrame, text="Login", width=30)
+LoginButton = ttk.Button(RightFrame, text="Login", width=30, command=Login)
 LoginButton.place(x=100, y=225)
 
 def Register():
@@ -71,10 +89,13 @@ def Register():
         User = UserEntry.get()
         Pass = PassEntry.get()
 
-        DataBase.cursor.execute("""
-        INSERT INTO Users(Name, Email, user, password)VALUES(?,?,?,?)
-        """,(Name, Email, User, Pass))
-        DataBase.conm.commit()
+        if (Name == "" or Email == "" or User == "" or Pass == ""):
+            messagebox.showerror(title='Register Error', message="Fill in all fields")
+        else:
+            DataBase.cursor.execute("""
+            INSERT INTO Users(Name, Email, user, password)VALUES(?,?,?,?)
+            """,(Name, Email, User, Pass))
+            DataBase.conm.commit()
         
         messagebox.showinfo(title="Register Info", message="Register Sucessfull")
 
