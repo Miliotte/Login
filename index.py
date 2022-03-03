@@ -60,7 +60,7 @@ def Login():
         if (User in VerifyLogin and Pass in VerifyLogin):
             messagebox.showinfo(title="Login Info", message="Acesso Confirmardo")
     except:
-            messagebox.showinfo(title="Login Info", message="Acesso Negado")
+            messagebox.showerror(title="Login Info", message="Acesso Negado")
 
 
 """Tupan acha o erro dessa porra ! lkkkk
