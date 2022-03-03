@@ -54,13 +54,17 @@ def Login():
     SELECT User, Password FROM Users WHERE User = ? and Password = ?
     """, (User, Pass))
     print("Logou")
+
     VerifyLogin = DataBase.cursor.fetchone()
     try:
         if (User in VerifyLogin and Pass in VerifyLogin):
-            messagebox.showinfo(tile="Login Info", message="Acesso Confirmardo")
+            messagebox.showinfo(title="Login Info", message="Acesso Confirmardo")
     except:
             messagebox.showinfo(title="Login Info", message="Acesso Negado")
 
+
+"""Tupan acha o erro dessa porra ! lkkkk
+"""
 ##Button
 
 LoginButton = ttk.Button(RightFrame, text="Login", width=30, command=Login)
