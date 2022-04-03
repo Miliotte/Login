@@ -85,7 +85,21 @@ def Register():
     EmailEntry = ttk.Entry(RightFrame, width=39)
     EmailEntry.place(x=100, y=70)
 
+    ValPassLabel = Label(RightFrame, text= "Password: ", font=("Century Gothic", 20), bg="MIDNIGHTBLUE", fg="white")
+    ValPassLabel.place(x=5, y=190)
+
+    ValPassEntry = ttk.Entry(RightFrame, width=30)
+    ValPassEntry.place(x=150, y=200)
+
     ##register back to database
+    def AuthenticatePass(): 
+        PassOn = PassEntry.get()
+        PassTwo = ValPassEntry.get()
+
+        if(PassOn == PassTwo):
+            print('Ok Pass')
+        else:
+            messagebox.showerror(title='Password Error!',  message='Password Error!')
 
     def RegisterToDataBase():
         Name = NomeEntry.get()
@@ -103,7 +117,7 @@ def Register():
         
         messagebox.showinfo(title="Register Info", message="Register Sucessfull")
 
-    Register = ttk.Button(RightFrame, text="Register", width=30, command=RegisterToDataBase)
+    Register = ttk.Button(RightFrame, text="Register", width=30, command=lambda:[AuthenticatePass(), RegisterToDataBase()])
     Register.place(x=100, y=225)
 
     def BackToLogin ():
@@ -113,6 +127,7 @@ def Register():
         EmailEntry.place(x=5000)
         Register.place(x=5000)
         Back.place(x=5000)
+        
 
         LoginButton.place(x=100, y=225)
         RegisterButton.place(x=130, y=260)
