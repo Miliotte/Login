@@ -101,6 +101,7 @@ def Register():
         else:
             messagebox.showerror(title='Password Error!',  message='Password Error!')
 
+
     def RegisterToDataBase():
         Name = NomeEntry.get()
         Email = EmailEntry.get()
@@ -125,6 +126,8 @@ def Register():
         NomeEntry.place(x=5000)
         EmailLabel.place(x=5000)
         EmailEntry.place(x=5000)
+        ValPassEntry.place(x=5000)
+        ValPassLabel.place(x=5000)
         Register.place(x=5000)
         Back.place(x=5000)
         
