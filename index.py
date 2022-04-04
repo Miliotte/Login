@@ -6,6 +6,7 @@ from tkinter import messagebox
 from tkinter import font
 from tkinter import ttk
 from turtle import left, width
+from cffi import VerificationError
 
 from numpy import tile
 import DataBase
@@ -100,38 +101,29 @@ def Register():
         User = UserEntry.get()
         Pass = PassEntry.get()
 
-        if(PassOn == PassTwo):
-            print('Ok Pass')
-            if (Name == "" or Email == "" or User == "" or Pass == "" ):
-                 messagebox.showerror(title='Register Error', message="Fill in all fields")
+        DataBase.cursor.execute("""
+            SELECT User FROM Users WHERE User = ?
+            """, [User])
+        VerificationUser = DataBase.cursor.fetchone()
+
+        if(User not in VerificationUser):
+            print('ok')
+            if(PassOn == PassTwo):
+                print('Ok Pass')
+                if (Name == "" or Email == "" or User == "" or Pass == "" ):
+                    messagebox.showerror(title='Register Error', message="Fill in all fields") 
+                else:
+                    DataBase.cursor.execute("""
+                    INSERT INTO Users(Name, Email, user, password)VALUES(?,?,?,?)
+                    """,(Name, Email, User, Pass))
+                    DataBase.conm.commit()
+                    messagebox.showinfo(title='Cadastro Efetuado',  message='Cadastro Efetuado')
             else:
-                DataBase.cursor.execute("""
-                INSERT INTO Users(Name, Email, user, password)VALUES(?,?,?,?)
-                """,(Name, Email, User, Pass))
-                DataBase.conm.commit()
-                messagebox.showinfo(title='Cadastro Efetuado',  message='Cadastro Efetuado')
+                 messagebox.showerror(title='Password Error!',  message='Password Error!')
         else:
-            messagebox.showerror(title='Password Error!',  message='Password Error!')
+             messagebox.showerror(title='Usuer Exist',  message='Usuer Exist')
 
-
-       ## def RegisterToDataBase():
-       ##        Name = NomeEntry.get()
-       ##        Email = EmailEntry.get()
-       ##        User = UserEntry.get()
-         ##      Pass = PassEntry.get()
-       ##
-        ##       if (Name == "" or Email == "" or User == "" or Pass == ""):
-        ##           messagebox.showerror(title='Register Error', message="Fill in all fields")
-        ##       else:
-        ##           DataBase.cursor.execute("""
-        ##           INSERT INTO Users(Name, Email, user, password)VALUES(?,?,?,?)
-       ##            """,(Name, Email, User, Pass))
-        ##           DataBase.conm.commit()
-        
-            ##   messagebox.showinfo(title="Register Info", message="Register Sucessfull")
-
-
-    Register = ttk.Button(RightFrame, text="Register", width=30, command=lambda:[AuthenticatePass()])
+    Register = ttk.Button(RightFrame, text="Register", width=30, command=AuthenticatePass)
     Register.place(x=100, y=225)
 
     def BackToLogin ():
