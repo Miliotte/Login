@@ -105,7 +105,7 @@ def Register():
             SELECT User FROM Users WHERE User = ?
             """, [User])
         VerificationUser = DataBase.cursor.fetchone()
-
+##rever 
         if(User not in VerificationUser):
             print('ok')
             if(PassOn == PassTwo):
