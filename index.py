@@ -95,30 +95,43 @@ def Register():
     def AuthenticatePass(): 
         PassOn = PassEntry.get()
         PassTwo = ValPassEntry.get()
-
-        if(PassOn == PassTwo):
-            print('Ok Pass')
-        else:
-            messagebox.showerror(title='Password Error!',  message='Password Error!')
-
-
-    def RegisterToDataBase():
         Name = NomeEntry.get()
         Email = EmailEntry.get()
         User = UserEntry.get()
         Pass = PassEntry.get()
 
-        if (Name == "" or Email == "" or User == "" or Pass == ""):
-            messagebox.showerror(title='Register Error', message="Fill in all fields")
+        if(PassOn == PassTwo):
+            print('Ok Pass')
+            if (Name == "" or Email == "" or User == "" or Pass == "" ):
+                 messagebox.showerror(title='Register Error', message="Fill in all fields")
+            else:
+                DataBase.cursor.execute("""
+                INSERT INTO Users(Name, Email, user, password)VALUES(?,?,?,?)
+                """,(Name, Email, User, Pass))
+                DataBase.conm.commit()
+                messagebox.showinfo(title='Cadastro Efetuado',  message='Cadastro Efetuado')
         else:
-            DataBase.cursor.execute("""
-            INSERT INTO Users(Name, Email, user, password)VALUES(?,?,?,?)
-            """,(Name, Email, User, Pass))
-            DataBase.conm.commit()
-        
-        messagebox.showinfo(title="Register Info", message="Register Sucessfull")
+            messagebox.showerror(title='Password Error!',  message='Password Error!')
 
-    Register = ttk.Button(RightFrame, text="Register", width=30, command=lambda:[AuthenticatePass(), RegisterToDataBase()])
+
+       ## def RegisterToDataBase():
+       ##        Name = NomeEntry.get()
+       ##        Email = EmailEntry.get()
+       ##        User = UserEntry.get()
+         ##      Pass = PassEntry.get()
+       ##
+        ##       if (Name == "" or Email == "" or User == "" or Pass == ""):
+        ##           messagebox.showerror(title='Register Error', message="Fill in all fields")
+        ##       else:
+        ##           DataBase.cursor.execute("""
+        ##           INSERT INTO Users(Name, Email, user, password)VALUES(?,?,?,?)
+       ##            """,(Name, Email, User, Pass))
+        ##           DataBase.conm.commit()
+        
+            ##   messagebox.showinfo(title="Register Info", message="Register Sucessfull")
+
+
+    Register = ttk.Button(RightFrame, text="Register", width=30, command=lambda:[AuthenticatePass()])
     Register.place(x=100, y=225)
 
     def BackToLogin ():
