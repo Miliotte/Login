@@ -102,26 +102,25 @@ def Register():
         Pass = PassEntry.get()
 
         DataBase.cursor.execute("""
-            SELECT User FROM Users WHERE User = ?
-            """, [User])
-        VerificationUser = DataBase.cursor.fetchone()
+            SELECT user FROM Users
+            """)
+        for  UserVerificaion in DataBase.cursor:
+          print (UserVerificaion)
 ##rever 
-        if(User not in VerificationUser):
+        if (Name == "" or Email == "" or User == "" or Pass == "" ):
+            messagebox.showerror(title='Register Error', message="Fill in all fields") 
+        elif(PassOn != PassTwo):
+             messagebox.showerror(title='Password Error!',  message='Password Error!')
+        elif(User in UserVerificaion): 
             print('ok')
-            if(PassOn == PassTwo):
-                print('Ok Pass')
-                if (Name == "" or Email == "" or User == "" or Pass == "" ):
-                    messagebox.showerror(title='Register Error', message="Fill in all fields") 
-                else:
-                    DataBase.cursor.execute("""
-                    INSERT INTO Users(Name, Email, user, password)VALUES(?,?,?,?)
-                    """,(Name, Email, User, Pass))
-                    DataBase.conm.commit()
-                    messagebox.showinfo(title='Cadastro Efetuado',  message='Cadastro Efetuado')
-            else:
-                 messagebox.showerror(title='Password Error!',  message='Password Error!')
+            messagebox.showerror(title='User Exist',  message='User Exist')        
         else:
-             messagebox.showerror(title='Usuer Exist',  message='Usuer Exist')
+            DataBase.cursor.execute("""
+            INSERT INTO Users(Name, Email, user, password)VALUES(?,?,?,?)
+            """,(Name, Email, User, Pass))
+            DataBase.conm.commit()
+            messagebox.showinfo(title='Cadastro Efetuado',  message='Cadastro Efetuado')
+        
 
     Register = ttk.Button(RightFrame, text="Register", width=30, command=AuthenticatePass)
     Register.place(x=100, y=225)
